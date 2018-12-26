@@ -6,7 +6,7 @@ from flask import redirect
 from flask import url_for
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] =  'postgres://postgres:password@localhost/sample2'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://postgres:password@localhost/sample2'
 app.debug = True
 db = SQLAlchemy(app)
 
@@ -28,7 +28,14 @@ class User(db.Model):
 
 @app.route('/')
 def index():
-	return render_template('add_user.html')
+	#myUser = User.query.all()
+	#oneItem = User.query.filter_by(area="Paris 01").first()
+	return render_template('add_user.html') #myUser=myUser, oneItem=oneItem 
+
+@app.route('/profile/<latitude>')
+def profile(latitude):
+	user = User.query.filter_by(latitude=latitude).first()
+	return render_template('profile.html', user=user)
 
 @app.route('/post_user', methods=['POST'])
 def post_user():

@@ -18,5 +18,12 @@
 		<input id="message" name="message" type="text" />
 		<input type="submit" />
 	</form>
+
+	{% for user in myUser %}
+		<li>{{user.area }}</li>
+	{% endfor %}
+
+	{{ oneItem.area}}
+
 </body>
-</html>
+</html>	
